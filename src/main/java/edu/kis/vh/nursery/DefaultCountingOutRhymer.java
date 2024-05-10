@@ -4,18 +4,18 @@ public class DefaultCountingOutRhymer {
 
     private int[] numbers = new int[12];
 
-    public int total = -1;
+    private int total = -1;
 
-    public void countIn(int in) {
+    protected void countIn(int in) {
         if (!isFull())
             numbers[++total] = in;
     }
 
-    public boolean callCheck() {
+    protected boolean callCheck() {
         return total == -1;
     }
 
-    public boolean isFull() {
+    protected boolean isFull() {
         return total == 11;
     }
 
@@ -25,7 +25,7 @@ public class DefaultCountingOutRhymer {
         return numbers[total];
     }
 
-    public int countOut() {
+    protected int countOut() {
         if (callCheck())
             return -1;
         return numbers[total--];
