@@ -19,12 +19,12 @@ public class RhymersJUnitTest {
     public void testCallCheck() {
         DefaultCountingOutRhymer rhymer = new DefaultCountingOutRhymer();
         boolean result = rhymer.callCheck();
-        Assert.assertEquals(true, result);
+        Assert.assertTrue(result);
 
         rhymer.countIn(888);
 
         result = rhymer.callCheck();
-        Assert.assertEquals(false, result);
+        Assert.assertFalse(result);
     }
 
     @Test
@@ -33,12 +33,12 @@ public class RhymersJUnitTest {
         final int STACK_CAPACITY = 12;
         for (int i = 0; i < STACK_CAPACITY; i++) {
             boolean result = rhymer.isFull();
-            Assert.assertEquals(false, result);
+            Assert.assertFalse(result);
             rhymer.countIn(888);
         }
 
         boolean result = rhymer.isFull();
-        Assert.assertEquals(true, result);
+        Assert.assertTrue(result);
     }
 
     @Test
@@ -75,4 +75,48 @@ public class RhymersJUnitTest {
         Assert.assertEquals(EMPTY_STACK_VALUE, result);
     }
 
+
+    @Test
+    public void testCountInHanoiRhymer() {
+        HanoiRhymer hanoiRhymer = new HanoiRhymer();
+
+        hanoiRhymer.countIn(1);
+        hanoiRhymer.countIn(2);
+        hanoiRhymer.countIn(3);
+
+        Assert.assertEquals(2, hanoiRhymer.reportRejected());
+
+        hanoiRhymer.countIn(2);
+
+        Assert.assertEquals(3, hanoiRhymer.reportRejected());
+
+        hanoiRhymer.countIn(4);
+
+        Assert.assertEquals(4, hanoiRhymer.reportRejected());
+
+        hanoiRhymer.countIn(1);
+
+        Assert.assertEquals(4, hanoiRhymer.reportRejected());
+
+    }
+
+    @Test
+    public void testGetTotalRejectedHanoiRhymer() {
+        HanoiRhymer hanoiRhymer = new HanoiRhymer();
+
+        hanoiRhymer.countIn(1);
+        hanoiRhymer.countIn(2);
+        hanoiRhymer.countIn(3);
+
+        Assert.assertEquals(2, hanoiRhymer.getTotalRejected());
+
+        hanoiRhymer.countIn(2);
+        Assert.assertEquals(3, hanoiRhymer.getTotalRejected());
+
+        hanoiRhymer.countIn(4);
+        Assert.assertEquals(4, hanoiRhymer.getTotalRejected());
+
+        hanoiRhymer.countIn(1);
+        Assert.assertEquals(4, hanoiRhymer.getTotalRejected());
+    }
 }
